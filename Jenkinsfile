@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build Docker Image'){
             steps{
-                sh "docker build . -t s0pheap/demo-api:${DOCKER_TAG}"
+                sh "docker build . -t s0pheap/demo-jenkins:${DOCKER_TAG}"
             }
         }
         stage('DockerHub Push'){
