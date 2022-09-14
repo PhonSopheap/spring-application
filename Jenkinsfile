@@ -7,25 +7,25 @@ pipeline {
         maven 'maven3.8.6'
     }
     stages{
-//         stage ('Build spring') {
-//             steps {
-//                 echo 'building'
-//                 sh "mvn clean install -Dmaven.test.skip=true"
-//             }
-//         }
-//         stage('Build Docker Image'){
-//             steps{
-//                 sh "docker build . -t s0pheap/demo-jenkins:${DOCKER_TAG}"
-//             }
-//         }
-//         stage('DockerHub Push'){
-//             steps{
-//                 withCredentials([usernamePassword(credentialsId: 'AmSopheap', usernameVariable: 'dockerUser', passwordVariable: 'dockerHubPwd')]) {
-// 			sh 'docker login -u ${dockerUser} -p ${dockerHubPwd}'
-//                     sh 'docker push s0pheap/demo-jenkins:${DOCKER_TAG}'
-//                 }
-//             }
-//         }
+        stage ('Build spring') {
+            steps {
+                echo 'building'
+                sh "mvn clean install -Dmaven.test.skip=true"
+            }
+        }
+        stage('Build Docker Image'){
+            steps{
+                sh "docker build . -t s0pheap/demo-jenkins:${DOCKER_TAG}"
+            }
+        }
+        stage('DockerHub Push'){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'AmSopheap', usernameVariable: 'dockerUser', passwordVariable: 'dockerHubPwd')]) {
+			sh 'docker login -u ${dockerUser} -p ${dockerHubPwd}'
+                    sh 'docker push s0pheap/demo-jenkins:${DOCKER_TAG}'
+                }
+            }
+        }
         stage("Deploy to K8s"){
             steps{
                 sshagent(['ssh-key']){
