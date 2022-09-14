@@ -23,8 +23,4 @@ public class StudentController {
     public Student insertTeacher(@RequestBody Student student){
         return studentRepo.save(student);
     }
-    @GetMapping("/api/v1/teacher/hello")
-    public String sayHello(){
-        return "Hello teacher";
-    }
 }
