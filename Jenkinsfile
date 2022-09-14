@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        DOCKER_TAG = BUILD_NUMBER
+        DOCKER_TAG = ${BUILD_NUMBER}
     }
     tools {
         maven 'maven3.8.6'
