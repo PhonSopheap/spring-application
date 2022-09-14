@@ -21,7 +21,7 @@ pipeline {
         stage('DockerHub Push'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'AmSopheap', usernameVariable: 'dockerUser', passwordVariable: 'dockerHubPwd')]) {
-			sh 'docker login -u ${dockerUser} --password-stdin ${dockerHubPwd}'
+			sh 'docker login -u ${dockerUser} -p ${dockerHubPwd}'
                     sh 'docker push s0pheap/demo-jenkins:${DOCKER_TAG}'
                 }
             }
