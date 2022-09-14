@@ -21,14 +21,14 @@ pipeline {
         stage('DockerHub Push'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'AmSopheap', usernameVariable: 'dockerUser', passwordVariable: 'dockerHubPwd')]) {
-			sh 'docker login -u ${dockerUser} -p ${dockerHubPwd}'
+			sh 'docker login -u ${dockerUser} --password-stdin ${dockerHubPwd}'
                     sh 'docker push s0pheap/demo-jenkins:${DOCKER_TAG}'
                 }
             }
         }
         stage("Deploy to K8s"){
             steps{
-                sshagent(credentials('ssh-key')){
+                sshagent(credentials: ['ssh-key']){
 					sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml deploy.sh s0pheap@172.104.44.15:/home/s0pheap/jenkins'
 					script{
 						try{
