@@ -32,7 +32,8 @@ pipeline {
 					sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml deploy.sh s0pheap@172.104.44.15:/home/s0pheap/jenkins'
 					script{
 						try{
-							sh 'ssh s0pheap@172.104.44.15 chmod +x /home/s0pheap/jenkins/deploy.sh &&  /home/s0pheap/jenkins/deploy.sh ${DOCKER_TAG}'
+							sh 'ssh s0pheap@172.104.44.15 chmod +x /home/s0pheap/jenkins/deploy.sh'
+							sh "ssh s0pheap@172.104.44.15 /home/s0pheap/jenkins/deploy.sh ${DOCKER_TAG}"
 						}catch(error){
                             echo error
 						}
