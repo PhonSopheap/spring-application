@@ -28,7 +28,7 @@ pipeline {
         }
         stage("Deploy to K8s"){
             steps{
-                sshagent(['master']){
+                sshagent(credentials:['ssh-key']){
 					sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml deploy.sh s0pheap@172.104.44.15:/home/s0pheap/jenkins'
 					script{
 						try{
