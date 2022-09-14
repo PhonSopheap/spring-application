@@ -29,10 +29,10 @@ pipeline {
         stage("Deploy to K8s"){
             steps{
                 sshagent(credentials: ['ssh-key']){
-					sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml deploy.sh s0pheap@172.104.44.15:/home/s0pheap/jenkins'
+					sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml deploy.sh s0pheap@172.104.44.15:/jenkins'
 					script{
 						try{
-							sh "ssh s0pheap@172.104.44.15 chmod +x /home/s0pheap/jenkins/deploy.sh sh ./deploy.sh ${DOCKER_TAG}"
+							sh "ssh s0pheap@172.104.44.15 chmod +x /jenkins/deploy.sh sh ./deploy.sh ${DOCKER_TAG}"
 						}catch(error){
                             echo error
 						}
