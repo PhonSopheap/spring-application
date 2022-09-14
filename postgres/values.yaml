@@ -1,0 +1,15 @@
+replicasCount: 1
+postgres:
+  name: postgres
+  container:
+    image: postgres
+    port: 5432
+  service:
+    type: ClusterIP
+  volume:
+    name: postgres-data
+    path: /data
+    mountPath: /var/lib/postgresql/data
+  secret:
+    db_name: ZGVtbw== #demo
+    db_password: cGFzc3dvcmQ= #passwor

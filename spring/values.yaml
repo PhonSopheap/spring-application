@@ -1,0 +1,14 @@
+replicasCount: 2
+api:
+  name: spring-api
+  container:
+    image: s0pheap/api
+    port: 8080
+    nodePort: 30002
+  service:
+    type: NodePort
+  secret:
+    db_name: ZGVtbw== #demo
+    db_user: cG9zdGdyZXM= #postgres
+    db_host: MTAuMTAwLjE2Ny4xMTM6NTQzMg== #10.100.167.113:5432
+    db_password: cGFzc3dvcmQ= #password
